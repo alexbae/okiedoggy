@@ -13,6 +13,8 @@ import Shop from "./pages/Shop"
 import Notification from "./pages/Notification"
 import Settings from "./pages/Settings"
 
+import "./App.css"
+
 function App() {
     return (
         <main>

@@ -5,8 +5,10 @@ import "./Topbar.css"
 const Topbar = () => {
     return (
         <div className="topbar">
-            <span>OkieDoggy</span>
-            <NavLink className="navigation-item" to="notification">🔔</NavLink>
+            <div className="topbar-inner">
+                <span>OkieDoggy</span>
+                <NavLink className="navigation-item" to="notification">🔔</NavLink>
+            </div>
         </div>
     )
 }
