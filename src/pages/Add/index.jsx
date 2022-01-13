@@ -39,7 +39,7 @@ const Add = () => {
         <div>
             { photo ? (
                 <div>
-                    <img src={photo} />
+                    <img src={photo} alt="" />
                     <div>
                         <button onClick={upload}>⬆️</button>
                         <button onClick={retake}>↩️</button>
