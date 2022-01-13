@@ -1,0 +1,30 @@
+.navigation {
+    background-color: #528edd;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.navigation-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.navigation-item {
+    display: inline-block;
+    font-size: 2rem;
+    text-decoration: none;
+}
+
+.navigation-add-button {
+    display: flex;
+    background-color: yellow;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    justify-content: space-around;
+    align-items: center;
+}

@@ -1,3 +1,5 @@
+import "./Me.css"
+
 const Me = () => {
     return (
         <div>Me</div>
