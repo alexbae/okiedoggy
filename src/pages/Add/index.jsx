@@ -31,7 +31,7 @@ const Add = () => {
         const imageSrc = webcamRef.current.getScreenshot()
         setPhoto(imageSrc)
         updateContextValues({ photoData: imageSrc })
-    }, [webcamRef])
+    }, [webcamRef, updateContextValues])
 
     const switchCam = () => {
         setCamPos(camPos === "back" ? "user" : "back")
