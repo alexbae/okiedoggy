@@ -1,14 +1,3 @@
-.add-action-button {
-    background-color: yellow;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    font-size: 2rem;
-    bottom: 0.5rem;
-    z-index: 100;
-    left: calc(50% - 2rem);
-}
-
-.add-secondary-button {
-
+.add-video {
+    object-fit: cover;
 }

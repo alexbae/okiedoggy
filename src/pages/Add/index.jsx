@@ -2,6 +2,7 @@ import { useRef, useCallback, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import Webcam from 'react-webcam'
 import { useMainContext } from '../../contexts/MainContext'
+import { isMobile } from '../../utils/isMobile'
 
 import Navigation from '../../components/Navigation'
 
@@ -20,11 +21,13 @@ const Add = () => {
 
     const navigate = useNavigate()
 
+    const isCamUsingSelfie = camPos !== "back" || !isMobile
+
     const videoConstraints = {
         width: WIDTH,
         height: HEIGHT,
         // TODO: when mobile device start from back
-        facingMode: camPos === "back" ? { exact: "environment" } : "user" 
+        facingMode: isCamUsingSelfie ? "user" : { exact: "environment" }
     }
 
     const capture = useCallback(() => {
@@ -34,7 +37,7 @@ const Add = () => {
     }, [webcamRef, updateContextValues])
 
     const switchCam = () => {
-        setCamPos(camPos === "back" ? "user" : "back")
+        setCamPos(isCamUsingSelfie ? "back" : "user")
     }
 
     const onCancel = () => {
@@ -69,15 +72,18 @@ const Add = () => {
                         width={WIDTH}
                         height={HEIGHT}
                         screenshotFormat="image/jpeg"
-                        mirrored={true}
+                        mirrored={isCamUsingSelfie ? true : false}
                         videoConstraints={videoConstraints}
+                        className="add-video"
                     />
                     <Navigation>
                         <button className="navigation-item" onClick={redirectBack}>⬅️</button>
                         <button className="navigation-item" onClick={capture}>
                             <span className="navigation-add-button">📷</span>
                         </button>
-                        <button className="navigation-item" onClick={switchCam}>🔄</button>
+                        {isMobile && (
+                            <button className="navigation-item" onClick={switchCam}>🔄</button>
+                        )}
                     </Navigation>
                 </>
             )}
