@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom"
+import { getAuth } from 'firebase/auth'
 
 import MainNavigation from "./components/Navigation/MainNavigation"
 import Topbar from "./components/Topbar"
@@ -14,13 +15,16 @@ import Shop from "./pages/Shop"
 import Notification from "./pages/Notification"
 import Settings from "./pages/Settings"
 
-import "./App.css"
 import MainContextProvider from "./contexts/MainContext"
+
+import "./App.css"
 
 function App() {
     const location = useLocation()
 
     const showNavigation = !location.pathname.includes("/add")
+
+    console.log('test', getAuth().currentUser)
 
     return (
         <MainContextProvider>
