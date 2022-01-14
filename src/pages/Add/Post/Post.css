@@ -1,0 +1,21 @@
+.post-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.post-textarea {
+    resize: none;
+    border: none;
+    height: 100px;
+}
+
+.post-textarea:hover {
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
