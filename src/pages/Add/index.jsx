@@ -56,7 +56,7 @@ const Add = () => {
         <div>
             { photo ? (
                 <>
-                    <img src={photo} alt="" />
+                    <img src={photo} alt="" width={WIDTH} height={HEIGHT} className="add-image-cover" />
                     <Navigation>
                         <button className="navigation-item" onClick={redirectBack}>⬅️</button>
                         <button className="navigation-item" onClick={handleNext}>
@@ -74,7 +74,7 @@ const Add = () => {
                         screenshotFormat="image/jpeg"
                         mirrored={isCamUsingSelfie ? true : false}
                         videoConstraints={videoConstraints}
-                        className="add-video"
+                        className="add-image-cover"
                     />
                     <Navigation>
                         <button className="navigation-item" onClick={redirectBack}>⬅️</button>
