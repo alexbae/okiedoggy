@@ -1,5 +1,6 @@
-import { Routes, Route, useLocation } from "react-router-dom"
-import { getAuth } from 'firebase/auth'
+import { useEffect, useState } from 'react'
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom"
+import { auth } from './Firebase/firebaseConfig'
 
 import MainNavigation from "./components/Navigation/MainNavigation"
 import Topbar from "./components/Topbar"
@@ -20,16 +21,28 @@ import MainContextProvider from "./contexts/MainContext"
 import "./App.css"
 
 function App() {
+    const [ userData, setUserData ] = useState(null)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                return setUserData(user)
+            }
+    
+            navigate('/login')
+        })
+    }, [])
+
     const location = useLocation()
 
-    const showNavigation = !location.pathname.includes("/add")
-
-    console.log('test', getAuth().currentUser)
+    const showNavigation = !location.pathname.includes("/add") && !location.pathname.includes("/login")
 
     return (
         <MainContextProvider>
             <main>
-                <Topbar />
+                <Topbar userData={userData} />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/register" element={<Register />} />
