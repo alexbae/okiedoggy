@@ -33,7 +33,7 @@ function App() {
     
             navigate('/login')
         })
-    }, [])
+    }, [navigate])
 
     const location = useLocation()
 
