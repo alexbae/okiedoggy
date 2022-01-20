@@ -27,11 +27,10 @@ function App() {
 
     const userLoginStatus = getUserLoginStatus()
     useEffect(() => {
-        console.log('userLogin', userLoginStatus)
         if (!userLoginStatus) {
             navigate('/login')
         }
-    }, [navigate])
+    }, [navigate, userLoginStatus])
 
     const showNavigation = !location.pathname.includes("/add") && !location.pathname.includes("/login")
 
