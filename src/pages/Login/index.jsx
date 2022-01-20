@@ -1,20 +1,26 @@
 import { auth } from '../../Firebase/firebaseConfig'
 import { useNavigate } from "react-router-dom"
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth"
+
+import { setUserLoginStatus } from '../../utils/userLoginStatus'
 
 const Login = () => {
     const navigate = useNavigate()
 
     const signInWithGoogle = () => {
         const provider = new GoogleAuthProvider()
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                console.log(result)
-                
-                navigate('/')
-            })
-            .catch((err) => console.log('error', err))
+        signInWithRedirect(auth, provider)
     }
+
+    getRedirectResult(auth)
+        .then((result) => {
+            console.log('test', result)
+            if (result) {
+                setUserLoginStatus(true)
+                navigate('/')
+            }
+        })
+        .catch((err) => console.log('error', err))
 
     return (
         <div>

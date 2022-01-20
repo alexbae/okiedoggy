@@ -2,18 +2,21 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 import { auth } from '../../Firebase/firebaseConfig'
 import { signOut } from "firebase/auth"
+import { useUser } from '../../Hooks/useUser'
 
 import "./Topbar.css"
+import { removeUserLoginStatus } from "../../utils/userLoginStatus"
 
-const Topbar = ({ userData }) => {
+const Topbar = ({ userLoginStatus }) => {
     const navigate = useNavigate()
     const location = useLocation()
+    const userData = useUser()
 
     const handleSignOut = () => {
         signOut(auth)
             .then((result) => {
                 console.log(result)
-                
+                removeUserLoginStatus()
                 navigate('/login')
             })
             .catch((err) => console.log('error', err))
@@ -25,7 +28,7 @@ const Topbar = ({ userData }) => {
         <div className="topbar">
             <div className="topbar-inner">
                 <span>OkieDoggy</span>
-                {!isLoginPage && userData?.displayName && (
+                {!isLoginPage && userLoginStatus && userData?.displayName && (
                     <div>
                         <span>{userData.displayName}</span>
                         <NavLink className="navigation-item" to="notification">🔔</NavLink>

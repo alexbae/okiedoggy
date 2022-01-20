@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom"
-import { auth } from './Firebase/firebaseConfig'
 
 import MainNavigation from "./components/Navigation/MainNavigation"
 import Topbar from "./components/Topbar"
@@ -18,31 +16,29 @@ import Settings from "./pages/Settings"
 
 import MainContextProvider from "./contexts/MainContext"
 
+import { getUserLoginStatus } from './utils/userLoginStatus'
+
 import "./App.css"
+import { useEffect } from "react"
 
 function App() {
-    const [ userData, setUserData ] = useState(null)
-
     const navigate = useNavigate()
-
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                return setUserData(user)
-            }
-    
-            navigate('/login')
-        })
-    }, [navigate])
-
     const location = useLocation()
+
+    const userLoginStatus = getUserLoginStatus()
+    useEffect(() => {
+        console.log('userLogin', userLoginStatus)
+        if (!userLoginStatus) {
+            navigate('/login')
+        }
+    }, [navigate])
 
     const showNavigation = !location.pathname.includes("/add") && !location.pathname.includes("/login")
 
     return (
         <MainContextProvider>
             <main>
-                <Topbar userData={userData} />
+                <Topbar userLoginStatus={userLoginStatus} />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/register" element={<Register />} />
